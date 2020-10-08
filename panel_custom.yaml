@@ -3,4 +3,3 @@
   sidebar_icon: mdi:floor-plan
   module_url: /local/custom-floor-panel.js
   config: !include floorplan_casa.yaml
-

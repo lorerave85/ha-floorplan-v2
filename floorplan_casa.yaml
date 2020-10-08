@@ -1,4 +1,4 @@
-      name: Demo Floorplan
+      name: Floorplan
       image: /local/custom_ui/floorplan/casa.svg
       stylesheet: /local/custom_ui/floorplan/casa.css
       

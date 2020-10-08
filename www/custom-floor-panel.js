@@ -7,7 +7,6 @@ import {
 import '/local/floorplan/lib/floor-panelV2.js'
 import '/local/floorplan/lib/jquery-3.4.1.min.js'
 
-
 class FloorPanelV2 extends LitElement {
 
     static get is() {

@@ -1,4 +1,4 @@
-# ha-floorplan-v2
+# ha-floorplan-V2
 
 ![Alt text](/show_images/home.png?raw=true "Optional Title")
 
