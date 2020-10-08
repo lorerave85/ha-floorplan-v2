@@ -1,0 +1,6 @@
+- name: floor-panel-v2
+  sidebar_title: Floor Panel
+  sidebar_icon: mdi:floor-plan
+  module_url: /local/custom-floor-panel.js
+  config: !include floorplan_casa.yaml
+
