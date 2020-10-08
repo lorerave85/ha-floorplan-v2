@@ -1,0 +1,225 @@
+      name: Demo Floorplan
+      image: /local/custom_ui/floorplan/casa.svg
+      stylesheet: /local/custom_ui/floorplan/casa.css
+      
+      # These options are optional
+      # warnings:                  # enable warnings (to find out why things might ot be working correctly)
+      # pan_zoom:                  # enable experimental panning / zooming
+      hide_app_toolbar:          # hide the application toolbar (when used as a custom panel)
+      date_format: DD-MMM-YYYY   # Date format to use in hover-over text
+      
+      last_motion_entity: sensor.template_last_motion
+      last_motion_class: last-motion
+
+      groups:
+
+        - name: Sensors_wind
+          entities:
+            -  sensor.wind_2
+          text_template: '${entity.state != "unavailable" ? entity.state : "--"}'
+          class_template: 'return "static-temp";'
+
+        - name: Sensors_pm25
+          entities:
+            -  fan.air_purifier
+          text_template: '${entity.attributes.aqi ? entity.attributes.aqi : "--"}'
+          class_template: 'return "static-temp";'
+
+        - name: Sensors_temp
+          entities:
+            -  sensor.sensor_camera_temperature
+            -  sensor.sensor_ludovica_temperature
+            -  sensor.sensor_bagno_temperature
+            -  sensor.temperature_7
+            -  sensor.sensor_cucina_temperature
+            -  sensor.weather_temperature
+            -  sensor.temperature_5
+            -  sensor.temperature_10
+            -  sensor.external_temperature
+          text_template: '${entity.state != "unknown" ? entity.state : "--"}'
+          class_template: 'return "static-text";'
+
+        - name: Sensors_hum
+          entities:
+            -  sensor.sensor_camera_humidity
+            -  sensor.sensor_ludovica_humidity
+            -  sensor.sensor_bagno_humidity
+            -  sensor.humidity_8
+            -  sensor.sensor_cucina_humidity
+            -  sensor.weather_humidity
+            -  sensor.humidity_3 
+            -  sensor.humidity_11
+            -  sensor.external_humidity
+          text_template: '${entity.state != "unknown" ? entity.state : "--"}'
+          class_template: 'return "static-text";'
+
+        - name: Sensors_pressure
+          entities:
+            -  sensor.pressure_4
+          text_template: '${entity.state ? entity.state : "--"}'
+          class_template: 'return "static-text";'
+
+        - name: text_font_datetime
+          entities:
+            - sensor.date
+            - sensor.time
+          text_template: '${entity.state ? entity.state : "undefined"}'
+          class_template: 'return "static-text";'
+
+        - name: windows_status
+          entities:
+            - binary_sensor.openclose_14
+            - binary_sensor.openclose_15
+            - binary_sensor.openclose_16
+            - binary_sensor.openclose_17
+            - binary_sensor.openclose_18
+            - binary_sensor.openclose_19
+          text_template: '${entity.state ? entity.state : "undefined"}'
+          class_template: '
+          if (entity.state=="on")
+            return "window-open";
+          else 
+            return "window-close";
+          '
+
+        - name: Exit_port_Sensors
+          entities:
+            - binary_sensor.openclose_13
+          image_template: '
+            var imageName = "";
+            switch (entity.state) {
+              case "on":
+                imageName = "patioDoorOpen";
+                break;
+              case "off":
+                imageName = "patioDoorClosed";
+                break;
+              }
+            return "/local/custom_ui/floorplan/images/other/" + imageName + ".svg";
+            '
+
+        - name: Printer_3D
+          entities:
+            - binary_sensor.octoprint_printing
+          image_template: '
+            var imageName = "";
+            switch (entity.state) {
+              case "on":
+                imageName = "3DPrinterON";
+                break;
+              case "off":
+                imageName = "3DPrinterOFF";
+                break;
+              }
+            return "/local/custom_ui/floorplan/images/other/" + imageName + ".svg";
+            '
+
+        - name: Alarm
+          entities:
+            - alarm_control_panel.allarme
+          image_template: '
+            var imageName = "";
+            switch (entity.state) {
+              case "disarmed":
+                imageName = "shield_off";
+                break;
+              case "armed_away":
+                imageName = "shield_on";
+                break;
+              case "pending":
+                imageName = "shield_working";
+                break;
+              }
+            return "/local/custom_ui/floorplan/images/other/" + imageName + ".svg";
+            '
+
+        - name: Vacuum
+          entities:
+            - vacuum.aspirapolvere
+          image_template: '
+            var imageName = "";
+            switch (entity.state) {
+              case "cleaning":
+                imageName = "robot-vacuum-cleaner_run";
+                break;
+              case "docked":
+                imageName = "robot-vacuum-cleaner_dock";
+                break;
+              case "idle":
+                imageName = "robot-vacuum-cleaner_stop";
+                break;
+              case "returning":
+                imageName = "robot-vacuum-cleaner_return";
+                break;
+              }
+            return "/local/custom_ui/floorplan/images/other/" + imageName + ".svg";
+            '
+        
+        - name: Condizonatore
+          entities:
+            - climate.condizionatore_salotto
+          image_template: '
+            var imageName = "";
+            switch (entity.state) {
+              case "off":
+                imageName = "condizionatore_off";
+                break;
+              case "dry":
+                imageName = "condizionatore_dry";
+                break;
+              case "cool":
+                imageName = "condizionatore_cool";
+                break;
+              case "fan_only":
+                imageName = "condizionatore_fan_only";
+                break;
+              case "heat":
+                imageName = "condizionatore_heat";
+                break;
+              }
+            return "/local/custom_ui/floorplan/images/other/" + imageName + ".svg";
+            '
+
+        - name: Light
+          entities:
+            - switch.on_off_plug_in_unit_12
+            - light.color_temperature_light_ikea
+            - light.aqara_01
+            - light.aqara_02
+            - light.aqara_03
+          image_template: '
+            var imageName = "";
+            switch (entity.state) {
+              case "on":
+                imageName = "lightON";
+                break;
+              case "off":
+                imageName = "lightOFF";
+                break;
+              }
+            return "/local/custom_ui/floorplan/images/other/" + imageName + ".svg";
+            '
+
+        - name: WaterPump
+          entities:
+            - switch.relepompa1
+            - switch.relepompa2
+          image_template: '
+            var imageName = "";
+            switch (entity.state) {
+              case "on":
+                imageName = "waterON";
+                break;
+              case "off":
+                imageName = "waterOFF";
+                break;
+              }
+            return "/local/custom_ui/floorplan/images/other/" + imageName + ".svg";
+            '
+
+        - name: Sensors_plant
+          entities:
+            -  sensor.plant_moisture_00
+            -  sensor.plant_moisture_01
+          text_template: '${entity.state != "unknown" ? entity.state : "-"}'
+          class_template: 'return "static-text";'
