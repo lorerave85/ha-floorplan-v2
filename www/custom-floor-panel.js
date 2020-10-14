@@ -129,20 +129,29 @@ class FloorPanelV2 extends LitElement {
     render() {
         return html `
         <ha-app-layout>
-        <app-header slot="header" fixed>
-          <app-toolbar>
-            <ha-menu-button
-              .hass=${this.hass}
-              .narrow=${this.narrow}
-            ></ha-menu-button>
-            <div main-title>Floor Panel</div>
-          </app-toolbar>
-        </app-header>
- 
-        <div id="floorplan"></div>
-
-      </ha-app-layout>
-      
+            <app-header slot="header" fixed>
+              <app-toolbar>
+                <ha-menu-button
+                  .hass=${this.hass}
+                  .narrow=${this.narrow}
+                ></ha-menu-button>
+                <div main-title>Floor Panel</div>
+              </app-toolbar>
+            </app-header>
+        
+            <div class="flex content">
+                ${this._isLoading
+                    ? html `<div class="progress-wrapper">
+                        <ha-circular-progress
+                          active
+                          alt=${this.hass.localize("ui.common.loading")}
+                        ></ha-circular-progress>
+                      </div>`
+                    : html `
+                    <div id="floorplan"></div>
+                      `}
+            </div>
+        </ha-app-layout>
     `;
     }
 
