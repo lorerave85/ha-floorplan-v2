@@ -139,7 +139,7 @@ class FloorPanelV2 extends LitElement {
               </app-toolbar>
             </app-header>
         
-            <div class="flex content">
+            <div class="container uni-virtualizer-host">
                 ${this._isLoading
                     ? html `<div class="progress-wrapper">
                         <ha-circular-progress
@@ -170,6 +170,14 @@ class FloorPanelV2 extends LitElement {
  
         :host([narrow]) .progress-wrapper {
           height: calc(100vh - 198px);
+        }
+
+        .uni-virtualizer-host {
+          display: block;
+          position: relative;
+          contain: strict;
+          height: 100%;
+          overflow: auto;
         }
  
         ha-circular-progress {
